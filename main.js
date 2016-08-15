@@ -13,10 +13,11 @@ function createWindow () {
   mainWindow = new BrowserWindow({width: 800, height: 600})
 
   // and load the index.html of the app.
-  mainWindow.loadURL(`file://${__dirname}/index.html`)
+  // TODO change build/ directory??
+  mainWindow.loadURL(`file://${__dirname}/build/index.html`)
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  //mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
@@ -25,6 +26,9 @@ function createWindow () {
     // when you should delete the corresponding element.
     mainWindow = null
   })
+
+  // add extension
+  BrowserWindow.addDevToolsExtension('/Users/darreneng/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/0.15.0_0')
 }
 
 // This method will be called when Electron has finished
@@ -51,3 +55,16 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+// Dialog stuff
+const ipc = electron.ipcMain
+const dialog = electron.dialog
+ipc.on('label-dir-dialog', (event) => {
+  console.log('label-dir-dialog selected')
+  dialog.showOpenDialog(mainWindow, {
+    properties: [ 'openDirectory' ]
+  }, (files) => {
+    if (files) event.sender.send('selected-label-dir', files)
+  })
+})
+// End Dialog stuff
