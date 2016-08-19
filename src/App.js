@@ -46,7 +46,7 @@ class App extends Component {
         <div className="App-body container">
           We are using node {process.versions.node}
           <ImageForm onPathSubmit={this.handlePathSubmit}/>
-          <LabelForm crop={this.state.crop}/>
+          <LabelForm src={this.state.src} crop={this.state.crop}/>
           <ReactCrop src={this.state.src} onComplete={this.handleOnComplete} />
         </div>
       </div>

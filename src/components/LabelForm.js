@@ -7,7 +7,7 @@ export default class LabelForm extends Component {
   render() {
     return (
       <div>
-        <LabelWrite />
+        <LabelWrite src={this.state.src} crop={this.state.crop} />
         <CropData crop={this.props.crop} />
       </div>
     )

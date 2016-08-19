@@ -28,7 +28,7 @@ function createWindow () {
   })
 
   // add extension
-  BrowserWindow.addDevToolsExtension('/Users/darreneng/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/0.15.0_0')
+  BrowserWindow.addDevToolsExtension('/Users/darreneng/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/0.15.1_0')
 }
 
 // This method will be called when Electron has finished
@@ -59,6 +59,7 @@ app.on('activate', function () {
 // Dialog stuff
 const ipc = electron.ipcMain
 const dialog = electron.dialog
+const fs = require('fs')
 ipc.on('label-dir-dialog', (event) => {
   console.log('label-dir-dialog selected')
   dialog.showOpenDialog(mainWindow, {
@@ -66,5 +67,9 @@ ipc.on('label-dir-dialog', (event) => {
   }, (files) => {
     if (files) event.sender.send('selected-label-dir', files)
   })
+})
+
+ipc.on('label-write-dialog', (event, arg) => {
+  // TODO write label to file
 })
 // End Dialog stuff
