@@ -4,7 +4,7 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "webpack; electron ."
+    "start": "webpack --display-error-details --devtool source-map; electron ."
   },
   "repository": {
     "type": "git",
@@ -39,6 +39,8 @@
     "react": "^15.3.0",
     "react-bootstrap": "^0.30.2",
     "react-dom": "^15.3.0",
-    "react-image-crop": "^1.0.0-rc6"
+    "react-image-crop": "^1.0.0-rc6",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2"
   }
 }
