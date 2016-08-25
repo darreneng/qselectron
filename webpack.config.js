@@ -11,6 +11,9 @@ module.exports = {
     path: __dirname + '/build'
   },
 
+  debug: true,
+  devtool: '#eval-source-map',
+
   resolve: {
     modulesDirectories: ['node_modules', 'src'],
     extension: ['', '.js', '.json']
