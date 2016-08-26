@@ -1,11 +1,11 @@
 import React from "react"
-import ReactDOM from "react-dom"
+import { render } from "react-dom"
 import App from "./App.js"
 import { createStore } from "redux"
 import { Provider } from "react-redux"
 import bboxApp from './reducers'
 
-let initialState = {
+const initialState = {
   image: '',
   labelDir: '',
   crops: {
@@ -16,5 +16,9 @@ let initialState = {
 
 let store = createStore(bboxApp, initialState)
 
-ReactDOM.render(<App />,
-                document.getElementById('root'));
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+)
