@@ -46,6 +46,8 @@ const crops = (state = {}, action) => {
     case CLEAR_CROPS:
     case WRITE_LABEL:
       return { current: state.current, saved: saved(state.saved, action) }
+    default:
+      return state
   }
 }
 
@@ -68,6 +70,7 @@ const crops = (state = [], action) => {
 */
 
 
-export const bboxApp = combineReducers({
+const bboxApp = combineReducers({
   image, labelDir, crops
 })
+export default bboxApp
