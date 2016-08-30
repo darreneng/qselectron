@@ -28,7 +28,7 @@ function createWindow () {
   })
 
   // add extension
-  BrowserWindow.addDevToolsExtension('/Users/darreneng/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/0.15.3_0')
+  BrowserWindow.addDevToolsExtension('/Users/darreneng/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/0.15.4_0')
 }
 
 // This method will be called when Electron has finished
