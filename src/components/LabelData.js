@@ -10,7 +10,7 @@ export default class LabelData extends Component {
 
     }
     return (
-
+      <div></div>
     )
   }
 }
