@@ -18,7 +18,9 @@ const mapDispatchToProps = (dispatch) => {
       ipc.send('label-dir-dialog')
     },
     handleLabelWriteBtnClick: () => {},
-    handleChooseImageBtnClick: () => {}
+    handleChooseImageBtnClick: () => {
+      ipc.send('choose-image-dialog')
+    }
   }
 }
 

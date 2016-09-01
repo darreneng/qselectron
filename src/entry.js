@@ -2,15 +2,12 @@ import React from "react"
 import { render } from "react-dom"
 
 import App from "./App.js"
-import ReactCropWrap from "./containers/ReactCropWrap"
-import CropBox from "./containers/CropBox"
-import DataBtnWrap from "./containers/DataBtnWrap"
 
 import { createStore } from "redux"
 import { Provider } from "react-redux"
 
 import bboxApp from './reducers'
-import { setLabelDir } from './actions'
+import { setLabelDir, setImage } from './actions'
 
 import { ipcRenderer as ipc } from 'electron'
 
@@ -31,6 +28,12 @@ ipc.on('selected-label-dir', (event, path) => {
   store.dispatch(setLabelDir(path))
 })
 
+ipc.on('selected-image', (event, path) => {
+  console.log('Image Selected:' + path)
+  store.dispatch(setImage(path))
+})
+// End listeners
+
 // Debug
 let unsubscribe = store.subscribe(() =>
   console.log(store.getState())
@@ -38,11 +41,7 @@ let unsubscribe = store.subscribe(() =>
 
 render(
   <Provider store={store}>
-    <div>
-      <DataBtnWrap />
-      <CropBox />
-      <ReactCropWrap />
-    </div>
+    <App />
   </Provider>,
   document.getElementById('root')
 )

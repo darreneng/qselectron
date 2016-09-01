@@ -61,7 +61,8 @@ const ipc = electron.ipcMain
 const dialog = electron.dialog
 const fs = require('fs')
 
-const labelDir = ''
+let labelDir = ''
+let image = ''
 ipc.on('label-dir-dialog', (event) => {
   console.log('label-dir-dialog selected')
   dialog.showOpenDialog(mainWindow, {
@@ -87,7 +88,10 @@ ipc.on('choose-image-dialog', (event) => {
   dialog.showOpenDialog(mainWindow, {
     properties: ['openFile']
   }, (file) => {
-    if (files) event.sender.send('selected-image', file)
+    if (file) {
+      image = file
+      event.sender.send('selected-image', file)
+    }
   })
 })
 // End Dialog stuff
