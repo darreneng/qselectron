@@ -60,16 +60,34 @@ app.on('activate', function () {
 const ipc = electron.ipcMain
 const dialog = electron.dialog
 const fs = require('fs')
+
+const labelDir = ''
 ipc.on('label-dir-dialog', (event) => {
   console.log('label-dir-dialog selected')
   dialog.showOpenDialog(mainWindow, {
     properties: [ 'openDirectory' ]
-  }, (files) => {
-    if (files) event.sender.send('selected-label-dir', files)
+  }, (file) => {
+    if (file) {
+      event.sender.send('selected-label-dir', file)
+      labelDir = file
+    }
   })
 })
 
 ipc.on('label-write-dialog', (event, arg) => {
-  // TODO write label to file
+  if (labelDir) {
+    // TODO write label to file
+    event.sender.send('label-write-success', labelDir)
+  } else {
+    event.sender.send('label-write-error')
+  }
+})
+
+ipc.on('choose-image-dialog', (event) => {
+  dialog.showOpenDialog(mainWindow, {
+    properties: ['openFile']
+  }, (file) => {
+    if (files) event.sender.send('selected-image', file)
+  })
 })
 // End Dialog stuff

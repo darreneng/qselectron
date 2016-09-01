@@ -36,39 +36,26 @@ const saved = (state = [], action) => {
 }
 
 const crops = (state = {}, action) => {
+  function getCrop(crop) {
+    return {
+      tlx: crop.x, tly: crop.y,
+      brx: crop.x + crop.width, bry: crop.y + crop.height
+    }
+  }
   switch(action.type) {
     case SET_CROP:
-      return { current: action.crop, saved: state.saved }
+      return Object.assign({}, state, { current: getCrop(action.crop) })
     case ADD_CROP:
-      return { current: state.current,
-               saved: [ ...state.saved, Object.assign({}, state.current) ] }
+      return Object.assign({}, state,
+              { saved: [...state.saved, Object.assign({}, state.current)] })
     case REMOVE_CROP:
     case CLEAR_CROPS:
     case WRITE_LABEL:
-      return { current: state.current, saved: saved(state.saved, action) }
+      return Object.assign({}, state, { saved: saved(state.saved, action) })
     default:
       return state
   }
 }
-
-/*
-const crops = (state = [], action) => {
-  switch (action.type) {
-    case ADD_CROP:
-      return [ ...state, crop ]
-    case REMOVE_CROP:
-      return state.filter((val, i) => {
-        return i !== action.id
-      })
-    case CLEAR_CROPS:
-    case WRITE_LABEL:
-      return []
-    default:
-      return state
-  }
-}
-*/
-
 
 const bboxApp = combineReducers({
   image, labelDir, crops

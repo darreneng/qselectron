@@ -4,7 +4,7 @@ import logo from './logo.svg';
 import Electron from 'electron'
 import os from 'os'
 // Components
-import ImageForm from './components/ImageForm'
+//import ImageForm from './components/ImageForm'
 import LabelForm from './components/LabelForm'
 import ReactCrop from 'react-image-crop'
 // Styles
@@ -44,9 +44,9 @@ class App extends Component {
           <h2>Bounding Box Generator</h2>
         </div>
         <div className="App-body container">
-          We are using node {process.versions.node}
-          <ImageForm onPathSubmit={this.handlePathSubmit}/>
+          <br/>
           <LabelForm src={this.state.src} crop={this.state.crop}/>
+          <br/>
           <ReactCrop src={this.state.src} onComplete={this.handleOnComplete} />
         </div>
       </div>

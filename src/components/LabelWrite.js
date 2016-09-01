@@ -33,6 +33,9 @@ export default class LabelWrite extends Component {
   render() {
     return (
       <ButtonToolbar>
+        <Button id='setImageBtn' onClick={() => {}}>
+          Choose Image Source
+        </Button>
         <Button id='labelWriteBtn'
                 bsStyle="primary"
                 onClick={this.handleLabelWriteBtnClick}>
@@ -41,11 +44,8 @@ export default class LabelWrite extends Component {
         <Button id='labelDirBtn' onClick={this.handleLabelDirBtnClick}>
           Choose Label Directory
         </Button>
-        <h5>{this.state.labelDir}</h5>
+        <h5>Label Dir: {this.state.labelDir}</h5>
       </ButtonToolbar>
     )
   }
 }
-/*
-
-*/
