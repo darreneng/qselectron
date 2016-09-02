@@ -3,7 +3,7 @@ import CropData from '../components/CropData'
 
 const mapStateToProps = (state) => {
   return {
-    crop: state.crops.current
+    crops: state.crops
   }
 }
 

@@ -13,11 +13,11 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
+  // TODO move all this shit to actions
   return {
     handleLabelDirBtnClick: () => {
       ipc.send('label-dir-dialog')
     },
-    handleLabelWriteBtnClick: () => {},
     handleChooseImageBtnClick: () => {
       ipc.send('choose-image-dialog')
     }

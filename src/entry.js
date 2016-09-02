@@ -7,12 +7,12 @@ import { createStore } from "redux"
 import { Provider } from "react-redux"
 
 import bboxApp from './reducers'
-import { setLabelDir, setImage } from './actions'
+import { setLabelDir, setImage, writeLabel } from './actions'
 
 import { ipcRenderer as ipc } from 'electron'
 
 const initialState = {
-  image: '/Users/darreneng/Downloads/Images/puppy2.jpg',
+  image: '',
   labelDir: '',
   crops: {
     current: { tlx: 0, tly: 0, brx: 0, bry: 0 },
@@ -31,6 +31,15 @@ ipc.on('selected-label-dir', (event, path) => {
 ipc.on('selected-image', (event, path) => {
   console.log('Image Selected:' + path)
   store.dispatch(setImage(path))
+})
+
+ipc.on('label-write-success', (event, path) => {
+  alert('Successfully wrote label at"', path, '"')
+  store.dispatch(writeLabel())
+})
+
+ipc.on('label-write-error', (event) => {
+  alert('Error! No label directory specified. Please choose a label directory')
 })
 // End listeners
 

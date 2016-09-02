@@ -60,25 +60,36 @@ app.on('activate', function () {
 const ipc = electron.ipcMain
 const dialog = electron.dialog
 const fs = require('fs')
+const path = require('path')
 
 let labelDir = ''
 let image = ''
+let dirimages = []
 ipc.on('label-dir-dialog', (event) => {
   console.log('label-dir-dialog selected')
   dialog.showOpenDialog(mainWindow, {
     properties: [ 'openDirectory' ]
-  }, (file) => {
-    if (file) {
-      event.sender.send('selected-label-dir', file)
-      labelDir = file
+  }, (files) => {
+    if (files) {
+      labelDir = files[0]
+      event.sender.send('selected-label-dir', labelDir)
     }
   })
 })
 
-ipc.on('label-write-dialog', (event, arg) => {
+ipc.on('label-write-dialog', (event, crops) => {
   if (labelDir) {
-    // TODO write label to file
-    event.sender.send('label-write-success', labelDir)
+    console.log(path.basename(image))
+    writePath = path.join(labelDir,
+                    path.basename(image, path.extname(image)) + '.txt')
+    // We are writing the current crop. Future implementation should writePath
+    // saved crops instead
+    c = crops.current
+    str = `sa 0 0 0 ${c.tlx} ${c.tly} ${c.brx} ${c.bry} 0 0 0 0 0 0 0\n`
+    fs.writeFile(writePath, str, (err) => {
+      if (err) console.log(err)
+      event.sender.send('label-write-success', writePath)
+    })
   } else {
     event.sender.send('label-write-error')
   }
@@ -86,11 +97,19 @@ ipc.on('label-write-dialog', (event, arg) => {
 
 ipc.on('choose-image-dialog', (event) => {
   dialog.showOpenDialog(mainWindow, {
-    properties: ['openFile']
-  }, (file) => {
-    if (file) {
-      image = file
-      event.sender.send('selected-image', file)
+    properties: ['openFile'],
+    filters: [
+      {name: 'Images', extensions: ['jpg', 'png', 'gif', 'bmp']}
+    ]}, (files) => {
+    if (files) {
+      image = files[0]
+      event.sender.send('selected-image', image)
+
+      /*
+      fs.readdir(path.dirname(file), (err, files) => {
+        if (err) console.log(err)
+        dirimages = files.sort()
+      })*/
     }
   })
 })

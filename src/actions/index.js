@@ -25,6 +25,11 @@ export const setLabelDir = (path) => {
   }
 }
 
+export const SEND_LABEL_DIR = 'SEND_LABEL_DIR'
+export const sendLabelDir = () => {
+  ipc.send('label-dir-dialog')
+}
+
 export const WRITE_LABEL = 'WRITE_LABEL'
 export const writeLabel = () => {
   // TODO ipc send

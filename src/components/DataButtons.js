@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, ButtonToolbar } from 'react-bootstrap'
+import { Button, ButtonToolbar, Label, Row, Col } from 'react-bootstrap'
 
 const DataButtons = (props) => {
   return (
@@ -8,18 +8,15 @@ const DataButtons = (props) => {
         <Button id='setImageBtn' onClick={props.handleChooseImageBtnClick}>
           Choose Image Source
         </Button>
-        <Button id='labelWriteBtn'
-                bsStyle="primary"
-                onClick={props.handleLabelWriteBtnClick}>
-          Write Label
-        </Button>
+        <h5><Label>Image Source:</Label> {props.image}</h5>
+      </ButtonToolbar>
+      <br/>
+      <ButtonToolbar>
         <Button id='labelDirBtn' onClick={props.handleLabelDirBtnClick}>
           Choose Label Directory
         </Button>
+        <h5><Label>Label Dir:</Label> {props.labelDir}</h5>
       </ButtonToolbar>
-      <br/>
-      <h5>Label Dir: {props.labelDir}</h5>
-      <h5>Image Src: {props.image}</h5>
     </div>
   )
 }
