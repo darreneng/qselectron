@@ -34,7 +34,7 @@ ipc.on('selected-image', (event, path) => {
 })
 
 ipc.on('label-write-success', (event, path) => {
-  alert('Successfully wrote label at"', path, '"')
+  alert('Successfully wrote label at"' + path + '"')
   store.dispatch(writeLabel())
 })
 
