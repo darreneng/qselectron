@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Table } from 'react-bootstrap'
+import { Button, ButtonToolbar, Table } from 'react-bootstrap'
 import { ipcRenderer as ipc } from 'electron'
 
 
@@ -27,11 +27,7 @@ const CropData = (props) => {
     <div className="CropData">
       <Button id='labelWriteBtn'
               bsStyle="primary"
-              onClick={() => {
-                // TODO send shit to server, move this to cropbox
-                ipc.send('label-write-dialog', props.crops)
-                //props.handleLabelWriteBtnClick()
-              }}>
+              onClick={() => {ipc.send('label-write-dialog', props.crops)}}>
         Write Label
       </Button>
       <br/>
@@ -61,6 +57,14 @@ const CropData = (props) => {
           </tr>
         </tbody>
       </Table>
+      <ButtonToolbar>
+        <Button id="previous" onClick={() => {ipc.send('next-image', false)}}>
+          Previous
+        </Button>
+        <Button id="next" onClick={() => {ipc.send('next-image', true)}}>
+          Next
+        </Button>
+      </ButtonToolbar>
     </div>
   )
 }
