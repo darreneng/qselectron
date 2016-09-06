@@ -4,7 +4,8 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "webpack --display-error-details --devtool source-map; electron ."
+    "start": "webpack --display-error-details; electron .",
+    "start:debug": "webpack --display-error-details --devtool source-map; electron ."
   },
   "repository": {
     "type": "git",
