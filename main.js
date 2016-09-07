@@ -105,17 +105,14 @@ ipc.on('choose-image-dialog', (event) => {
       image = files[0]
       event.sender.send('selected-image', image)
 
-      fs.readdir(path.dirname(image), (err, files) => {
-        if (err) console.log(err)
-        dirimages = files.filter(e => {
-          return (/^.*\.(jpg|jpeg|gif|JPG|png|PNG)$/).test(e)
-        }).sort()
-      })
+      dirimages = fs.readdirSync(path.dirname(image))
     }
   })
 })
 
 ipc.on('next-image', (event, next) => {
+  console.log(image)
+  console.log(dirimages)
   let imageIdx = dirimages.findIndex(e => {return e === path.basename(image)})
   if (next) {
     imageIdx = ++imageIdx < dirimages.length ? imageIdx : 0
